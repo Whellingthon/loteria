@@ -1,0 +1,239 @@
+:root {
+  --verde: #00713c;
+  --verde-claro: #e6f4ea;
+  --amarelo: #ffd700;
+  --fundo: #f4f6f8;
+  --card: #ffffff;
+  --texto: #1d2b36;
+  --texto-suave: #6b7a86;
+  --borda: #dfe6ec;
+  --raio: 14px;
+  --sombra: 0 2px 10px rgba(16, 42, 67, .08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 22px 28px;
+  background: linear-gradient(135deg, var(--verde) 0%, #005a2f 100%);
+  color: #fff;
+  box-shadow: var(--sombra);
+}
+
+.topo h1 { font-size: 1.5rem; letter-spacing: .3px; }
+.topo p { font-size: .85rem; opacity: .85; margin-top: 4px; }
+
+.badge-concurso {
+  background: var(--amarelo);
+  color: #5c4a00;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: .95rem;
+  white-space: nowrap;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 24px;
+  box-shadow: var(--sombra);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: var(--verde);
+  border-left: 4px solid var(--amarelo);
+  padding-left: 10px;
+}
+
+.bolinhas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bolinha {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 -4px 6px rgba(0, 0, 0, .25);
+}
+
+.controles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.campo label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--texto-suave);
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font-size: .95rem;
+  background: #fff;
+}
+
+.btn-primario {
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.btn-primario:hover:not(:disabled) { background: #005a2f; }
+.btn-primario:disabled { background: #b9c4cc; cursor: not-allowed; }
+
+.nota-filtros {
+  font-size: .82rem;
+  color: var(--texto-suave);
+  background: var(--verde-claro);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 16px 0;
+}
+
+.jogos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.jogo {
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.jogo header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--verde);
+  margin-bottom: 10px;
+}
+
+.jogo .meta {
+  font-size: .75rem;
+  color: var(--texto-suave);
+  font-weight: 500;
+}
+
+.jogo .dezenas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.jogo .dezenas span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde);
+  font-size: .8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jogo .dezenas span.rep {
+  background: var(--amarelo);
+  color: #5c4a00;
+}
+
+.tabela-wrapper { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--borda);
+}
+
+th {
+  background: var(--verde-claro);
+  color: var(--verde);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+td:first-child { font-weight: 700; }
+
+.barra {
+  background: #e9eef2;
+  border-radius: 6px;
+  height: 10px;
+  min-width: 80px;
+  overflow: hidden;
+}
+
+.barra > div {
+  height: 100%;
+  background: var(--verde);
+  border-radius: 6px;
+}
+
+.atraso-alta { color: #c0392b; font-weight: 700; }
+.status-erro { color: #ffdddd; font-weight: 600; }

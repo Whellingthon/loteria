@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratório Lotofácil | Probabilidade</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <h1>Laboratório Lotofácil</h1>
+      <p id="status-base">Carregando dados do Firestore...</p>
+    </div>
+    <div class="badge-concurso" id="badge-ultimo">Concurso #---</div>
+  </header>
+
+  <main class="container">
+    <!-- Último Sorteio -->
+    <section class="card">
+      <h2>Último Concurso Registrado</h2>
+      <div id="ultimo-sorteio" class="bolinhas-container"></div>
+    </section>
+
+    <!-- Gerador Probabilístico -->
+    <section class="card">
+      <h2>Gerador de Palpites Filtrados</h2>
+      <div class="controles">
+        <div class="campo">
+          <label for="qtd-jogos">Quantidade de jogos</label>
+          <input type="number" id="qtd-jogos" min="1" max="20" value="5">
+        </div>
+
+        <div class="campo">
+          <label for="estrategia">Peso probabilístico</label>
+          <select id="estrategia">
+            <option value="equilibrado">Equilibrado (Frequência + Atraso)</option>
+            <option value="frequencia">Priorizar mais frequentes (Quentes)</option>
+            <option value="atraso">Priorizar mais atrasadas (Frias)</option>
+            <option value="moda_posicional">Moda por Ordem de Sorteio (1ª à 15ª bola)</option>
+          </select>
+        </div>
+
+        <button id="btn-gerar" class="btn-primario" disabled>Gerar Jogos</button>
+      </div>
+
+      <p class="nota-filtros">
+        Filtros ativos: 7–8 pares • Soma 180–210 • 9–11 na moldura • 4–6 primos • 8–10 repetidas do último concurso.
+      </p>
+
+      <div id="lista-jogos" class="jogos-grid"></div>
+    </section>
+
+    <!-- Estatísticas das 25 Dezenas -->
+    <section class="card">
+      <h2>Mapa de Probabilidade Empírica e Atraso</h2>
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Dezena</th>
+              <th>Aparições</th>
+              <th>Prob. Empírica</th>
+              <th>Atraso (concursos)</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-estatisticas"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
