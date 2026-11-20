@@ -1,0 +1,32 @@
+name: Atualizar Lotofácil no Firestore
+
+on:
+  schedule:
+    # Roda todo dia às 00:30 UTC (21:30 no horário de Brasília)
+    - cron: '30 0 * * *'
+  # Permite rodar manualmente pela aba Actions ou pelo botão no HTML
+  workflow_dispatch:
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: pip install firebase-admin requests
+
+      - name: Recriar chave do Firebase a partir do Secret
+        env:
+          KEY_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: printf '%s' "$KEY_JSON" > serviceAccountKey.json
+
+      - name: Executar script de atualização
+        run: python atualizar_lotofacil.py

@@ -249,6 +249,53 @@ function gerarJogos() {
     `;
   }).join("");
 }
+const btnRobo = document.getElementById("btn-disparar-robo");
 
+async function dispararRoboGitHub() {
+  let token = localStorage.getItem("gh_token_loteria");
+
+  if (!token) {
+    token = prompt("Cole seu Fine-Grained Token do GitHub (ficará salvo só neste navegador):");
+    if (!token) return;
+    localStorage.setItem("gh_token_loteria", token.trim());
+  }
+
+  btnRobo.disabled = true;
+  btnRobo.textContent = "Disparando robô...";
+
+  try {
+    const resp = await fetch(
+      "https://api.github.com/repos/Whellingthon/loteria/actions/workflows/atualizar_lotofacil.yml/dispatches",
+      {
+        method: "POST",
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ref: "main" })
+      }
+    );
+
+    if (resp.status === 204) {
+      elStatus.textContent = "Robô acionado na nuvem! Aguarde ~40s e recarregue a página.";
+      btnRobo.textContent = "Robô rodando...";
+    } else if (resp.status === 401 || resp.status === 403) {
+      localStorage.removeItem("gh_token_loteria");
+      alert("Token inválido ou sem permissão de Actions. Tente novamente.");
+      btnRobo.disabled = false;
+      btnRobo.textContent = "⚡ Atualizar Base (Robô)";
+    } else {
+      throw new Error(`Erro HTTP ${resp.status}`);
+    }
+  } catch (erro) {
+    console.error(erro);
+    alert("Falha ao acionar o robô. Confira se o arquivo atualizar_lotofacil.yml já está no GitHub.");
+    btnRobo.disabled = false;
+    btnRobo.textContent = "⚡ Atualizar Base (Robô)";
+  }
+}
+
+btnRobo.addEventListener("click", dispararRoboGitHub);
 btnGerar.addEventListener("click", gerarJogos);
 carregarDados();
